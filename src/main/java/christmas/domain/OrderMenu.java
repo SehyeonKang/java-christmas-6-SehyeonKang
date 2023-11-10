@@ -10,6 +10,7 @@ public class OrderMenu {
     public OrderMenu(Map<String, Integer> orderedItems) {
         orderItems = new HashMap<>();
         saveOrderedItems(orderedItems);
+
         validateOrderAgainstMenu();
         validateOnlyBeverage();
         validateTotalItemCount();
