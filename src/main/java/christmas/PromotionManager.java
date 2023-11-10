@@ -57,11 +57,19 @@ public class PromotionManager {
             List<String> itemParts = Arrays.asList(menuItem.split("-"));
 
             String menuName = itemParts.get(0);
-            int count = Integer.parseInt(itemParts.get(1));
+            int count = convertToInt(itemParts.get(1));
 
             orderedItems.put(menuName, count);
         }
 
         return orderedItems;
+    }
+
+    private int convertToInt(String itemCount) {
+        try {
+            return Integer.parseInt(itemCount);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
     }
 }
