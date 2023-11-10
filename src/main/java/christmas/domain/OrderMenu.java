@@ -10,6 +10,7 @@ public class OrderMenu {
     public OrderMenu(Map<String, Integer> orderedItems) {
         orderItems = new HashMap<>();
         saveOrderedItems(orderedItems);
+        validateOrderAgainstMenu();
         validateOnlyBeverage();
         validateTotalItemCount();
     }
@@ -18,6 +19,14 @@ public class OrderMenu {
         for (String menuName : orderedItems.keySet()) {
             Menu menu = Menu.findByMenuName(menuName);
             orderItems.put(menu, orderedItems.get(menuName));
+        }
+    }
+
+    private void validateOrderAgainstMenu() {
+        for (Menu menu : orderItems.keySet()) {
+            if (menu == Menu.EMPTY) {
+                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            }
         }
     }
 
