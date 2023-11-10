@@ -55,14 +55,20 @@ public class PromotionManager {
 
         for (String menuItem : menuItems) {
             List<String> itemParts = Arrays.asList(menuItem.split("-"));
+            validateOrderFormat(itemParts);
 
             String menuName = itemParts.get(0);
             int count = convertToInt(itemParts.get(1));
 
             orderedItems.put(menuName, count);
         }
-
         return orderedItems;
+    }
+
+    private void validateOrderFormat(List<String> itemParts) {
+        if (itemParts.size() == 1) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
     }
 
     private int convertToInt(String itemCount) {
