@@ -11,6 +11,7 @@ public class OrderMenu {
         orderItems = new HashMap<>();
         saveOrderedItems(orderedItems);
         validateOnlyBeverage();
+        validateTotalItemCount();
     }
 
     private void saveOrderedItems(Map<String, Integer> orderedItems) {
@@ -30,6 +31,17 @@ public class OrderMenu {
 
         if (beverageCount == orderItems.size()) {
             throw new IllegalArgumentException("[ERROR] 음료만 주문할 수 없습니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private void validateTotalItemCount() {
+        int totalItemCount = 0;
+        for (Menu menu : orderItems.keySet()) {
+            totalItemCount += orderItems.get(menu);
+        }
+
+        if (totalItemCount > 20) {
+            throw new IllegalArgumentException("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해 주세요.");
         }
     }
 }
