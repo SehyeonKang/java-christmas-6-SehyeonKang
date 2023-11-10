@@ -1,8 +1,14 @@
 package christmas;
 
+import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PromotionManager {
 
@@ -16,6 +22,7 @@ public class PromotionManager {
 
     public void startPromotion() {
         VisitDate visitDate = saveVisitDate();
+        OrderMenu orderMenu = saveOrderMenu();
     }
 
     private VisitDate saveVisitDate() {
@@ -28,5 +35,33 @@ public class PromotionManager {
                 outputView.printErrorMessage(e.getMessage());
             }
         }
+    }
+
+    private OrderMenu saveOrderMenu() {
+        while (true) {
+            try {
+                String inputOrderMenu = inputView.readOrderMenu();
+                Map<String, Integer> orderedItems = convertToMenuMap(inputOrderMenu);
+                return new OrderMenu(orderedItems);
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
+    }
+
+    private Map<String, Integer> convertToMenuMap(String input) {
+        Map<String, Integer> orderedItems = new HashMap<>();
+        List<String> menuItems = Arrays.asList(input.split(","));
+
+        for (String menuItem : menuItems) {
+            List<String> itemParts = Arrays.asList(menuItem.split("-"));
+
+            String menuName = itemParts.get(0);
+            int count = Integer.parseInt(itemParts.get(1));
+
+            orderedItems.put(menuName, count);
+        }
+
+        return orderedItems;
     }
 }
