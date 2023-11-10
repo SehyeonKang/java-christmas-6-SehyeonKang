@@ -41,7 +41,7 @@ public class PromotionManager {
         while (true) {
             try {
                 String inputOrderMenu = inputView.readOrderMenu();
-                Map<String, Integer> orderedItems = convertToMenuMap(inputOrderMenu);
+                Map<String, Integer> orderedItems = convertToMap(inputOrderMenu);
                 return new OrderMenu(orderedItems);
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
@@ -49,9 +49,9 @@ public class PromotionManager {
         }
     }
 
-    private Map<String, Integer> convertToMenuMap(String input) {
+    private Map<String, Integer> convertToMap(String inputOrderMenu) {
         Map<String, Integer> orderedItems = new HashMap<>();
-        List<String> menuItems = Arrays.asList(input.split(","));
+        List<String> menuItems = Arrays.asList(inputOrderMenu.split(","));
 
         for (String menuItem : menuItems) {
             List<String> itemParts = Arrays.asList(menuItem.split("-"));
