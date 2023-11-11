@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.domain.OrderAmount;
 import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;
 import christmas.view.InputView;
@@ -23,6 +24,7 @@ public class PromotionManager {
     public void startPromotion() {
         VisitDate visitDate = saveVisitDate();
         OrderMenu orderMenu = saveOrderMenu();
+        runPromotion(visitDate, orderMenu);
     }
 
     private VisitDate saveVisitDate() {
@@ -89,5 +91,9 @@ public class PromotionManager {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
+    }
+
+    private void runPromotion(VisitDate visitDate, OrderMenu orderMenu) {
+        OrderAmount orderAmount = new OrderAmount(orderMenu.calculateTotalOrderAmount());
     }
 }

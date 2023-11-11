@@ -31,4 +31,8 @@ public enum Menu {
                 .findAny()
                 .orElse(EMPTY);
     }
+
+    public int calculateOrderAmount(int orderCount) {
+        return price * orderCount;
+    }
 }
