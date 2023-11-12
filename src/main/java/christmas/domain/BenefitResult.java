@@ -39,4 +39,12 @@ public class BenefitResult {
         }
         return discountAmount;
     }
+
+    public int applySpecialDiscount(DiscountEvent discountEvent) {
+        int discountAmount = 0;
+        if (discountEvent == DiscountEvent.SPECIAL) {
+            discountAmount = 1000;
+        }
+        return discountAmount;
+    }
 }
