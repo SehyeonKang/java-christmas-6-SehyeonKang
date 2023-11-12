@@ -26,7 +26,7 @@ public enum MenuGroup {
                 .orElse(EMPTY);
     }
 
-    public boolean hasMenu(Menu menu) {
+    private boolean hasMenu(Menu menu) {
         return menuItems.stream()
                 .anyMatch(menuItem -> menuItem == menu);
     }

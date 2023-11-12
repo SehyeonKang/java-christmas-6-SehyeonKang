@@ -9,6 +9,6 @@ public class Application {
         OutputView outputView = new OutputView();
         PromotionManager promotionManager = new PromotionManager(inputView, outputView);
 
-        promotionManager.startPromotion();
+        promotionManager.start();
     }
 }

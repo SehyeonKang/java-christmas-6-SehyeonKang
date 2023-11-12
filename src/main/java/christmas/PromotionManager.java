@@ -21,7 +21,7 @@ public class PromotionManager {
         this.outputView = outputView;
     }
 
-    public void startPromotion() {
+    public void start() {
         VisitDate visitDate = saveVisitDate();
         OrderMenu orderMenu = saveOrderMenu();
         runPromotion(visitDate, orderMenu);
@@ -95,5 +95,6 @@ public class PromotionManager {
 
     private void runPromotion(VisitDate visitDate, OrderMenu orderMenu) {
         OrderAmount orderAmount = new OrderAmount(orderMenu.calculateTotalOrderAmount());
+        orderAmount.applyDiscount(visitDate, orderMenu);
     }
 }
