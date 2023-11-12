@@ -35,4 +35,8 @@ public enum Menu {
     public int calculateOrderAmount(int orderCount) {
         return price * orderCount;
     }
+
+    public int calculateTotalBenefitAmount(int totalBenefitAmount) {
+        return price + totalBenefitAmount;
+    }
 }
