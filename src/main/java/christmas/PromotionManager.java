@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.domain.Menu;
 import christmas.domain.OrderAmount;
 import christmas.domain.OrderMenu;
 import christmas.domain.VisitDate;
@@ -96,6 +97,8 @@ public class PromotionManager {
     private void runPromotion(VisitDate visitDate, OrderMenu orderMenu) {
         OrderAmount orderAmount = new OrderAmount(orderMenu.calculateTotalOrderAmount());
         int discountedAmount = orderAmount.applyDiscount(visitDate, orderMenu);
+        Menu giftMenu = orderAmount.applyGiftBenefit();
         System.out.println(discountedAmount);
+        System.out.println(giftMenu);
     }
 }

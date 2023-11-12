@@ -1,7 +1,5 @@
 package christmas.domain;
 
-import org.mockito.internal.matchers.Or;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -27,6 +25,7 @@ public class BenefitResult {
         if (discountEvent == DiscountEvent.WEEKDAY) {
             int dessertCount = orderMenu.countDessertItems();
             discountAmount += 2023 * dessertCount;
+            benefitResult.put(discountEvent, discountAmount);
         }
         return discountAmount;
     }
@@ -36,6 +35,7 @@ public class BenefitResult {
         if (discountEvent == DiscountEvent.WEEKEND) {
             int mainCount = orderMenu.countMainItems();
             discountAmount += 2023 * mainCount;
+            benefitResult.put(discountEvent, discountAmount);
         }
         return discountAmount;
     }
@@ -44,7 +44,16 @@ public class BenefitResult {
         int discountAmount = 0;
         if (discountEvent == DiscountEvent.SPECIAL) {
             discountAmount = 1000;
+            benefitResult.put(discountEvent, discountAmount);
         }
         return discountAmount;
+    }
+
+    public int applyGiftDiscount(int totalOrderAmount) {
+        if (totalOrderAmount >= 120000) {
+            benefitResult.put(DiscountEvent.GIFT, 25000);
+            return 25000;
+        }
+        return 0;
     }
 }

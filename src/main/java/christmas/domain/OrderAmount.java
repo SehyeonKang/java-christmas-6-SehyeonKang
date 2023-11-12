@@ -32,4 +32,12 @@ public class OrderAmount {
         return totalOrderAmount >= 10000;
     }
 
+    public Menu applyGiftBenefit() {
+        int discountAmount = benefitResult.applyGiftDiscount(totalOrderAmount);
+        if (discountAmount > 0) {
+            return Menu.CHAMPAGNE;
+        }
+        return Menu.EMPTY;
+    }
+
 }
