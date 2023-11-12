@@ -19,4 +19,12 @@ public class BenefitResult {
         }
         return discountAmount;
     }
+
+    public int applyWeekDayDiscount(DiscountEvent discountEvent, OrderMenu orderMenu) {
+        int discountAmount = 0;
+        if (discountEvent == DiscountEvent.WEEKDAY) {
+
+        }
+        return discountAmount;
+    }
 }
