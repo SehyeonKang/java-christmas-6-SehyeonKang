@@ -18,10 +18,11 @@ public class OrderAmount {
         if (validateOrderAmount()) {
             List<DiscountEvent> discountEvents = visitDate.findDiscountEventByDay();
             for (DiscountEvent discountEvent : discountEvents) {
-                benefitResult.applyChristMasDDayDiscount(discountEvent);
+                discountAmount += benefitResult.applyChristMasDDayDiscount(discountEvent, visitDate);
             }
         }
-        return 0;
+
+        return totalOrderAmount - discountAmount;
     }
 
     private boolean validateOrderAmount() {

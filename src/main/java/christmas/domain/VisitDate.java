@@ -20,4 +20,8 @@ public class VisitDate {
     public List<DiscountEvent> findDiscountEventByDay() {
         return DiscountEvent.findByDay(day);
     }
+
+    public int calculateChristmasDDayDiscount() {
+        return (day - 1) * 100 + 1000;
+    }
 }
