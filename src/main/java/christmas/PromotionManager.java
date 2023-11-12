@@ -98,6 +98,8 @@ public class PromotionManager {
         System.out.println(discountedAmount);
         System.out.println(giftMenu);
         int totalBenefitAmount = orderAmount.calculateTotalBenefitAmount(giftMenu);
-
+        EventBadge eventBadge = EventBadge.findEventBadge(totalBenefitAmount);
+        System.out.println(totalBenefitAmount);
+        System.out.println(eventBadge.name());
     }
 }
