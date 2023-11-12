@@ -20,6 +20,7 @@ public class OrderAmount {
             for (DiscountEvent discountEvent : discountEvents) {
                 discountAmount += benefitResult.applyChristMasDDayDiscount(discountEvent, visitDate);
                 discountAmount += benefitResult.applyWeekDayDiscount(discountEvent, orderMenu);
+                discountAmount += benefitResult.applyWeekEndDiscount(discountEvent, orderMenu);
             }
         }
 
