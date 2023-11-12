@@ -96,5 +96,6 @@ public class PromotionManager {
     private void runPromotion(VisitDate visitDate, OrderMenu orderMenu) {
         OrderAmount orderAmount = new OrderAmount(orderMenu.calculateTotalOrderAmount());
         int discountedAmount = orderAmount.applyDiscount(visitDate, orderMenu);
+        System.out.println(discountedAmount);
     }
 }

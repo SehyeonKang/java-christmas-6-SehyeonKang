@@ -69,4 +69,16 @@ public class OrderMenu {
 
         return totalOrderAmount;
     }
+
+    public int countDessertItems() {
+        int dessertCount = 0;
+
+        for (Menu menu : orderItems.keySet()) {
+            if (MenuGroup.findByMenu(menu) == MenuGroup.DESSERT) {
+                dessertCount += orderItems.get(menu);
+            }
+        }
+
+        return dessertCount;
+    }
 }

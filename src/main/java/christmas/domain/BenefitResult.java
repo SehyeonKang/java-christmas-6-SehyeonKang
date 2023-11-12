@@ -23,7 +23,8 @@ public class BenefitResult {
     public int applyWeekDayDiscount(DiscountEvent discountEvent, OrderMenu orderMenu) {
         int discountAmount = 0;
         if (discountEvent == DiscountEvent.WEEKDAY) {
-
+            int dessertCount = orderMenu.countDessertItems();
+            discountAmount += 2023 * dessertCount;
         }
         return discountAmount;
     }
