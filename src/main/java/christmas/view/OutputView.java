@@ -73,4 +73,9 @@ public class OutputView {
         System.out.println("\n<할인 후 예상 결제 금액>");
         System.out.println(formattedDiscountedAmount + "원");
     }
+
+    public void printEventBadge(EventBadge eventBadge) {
+        System.out.println("\n<12월 이벤트 배지>");
+        System.out.print(eventBadge.getName());
+    }
 }

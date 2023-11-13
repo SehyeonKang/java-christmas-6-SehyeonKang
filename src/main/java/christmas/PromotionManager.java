@@ -112,12 +112,11 @@ public class PromotionManager {
     private void announceBenefitResults(OrderAmount orderAmount, OrderMenu orderMenu, VisitDate visitDate) {
         int discountedAmount = orderAmount.applyDiscount(visitDate, orderMenu);
         int totalBenefitAmount = orderAmount.calculateTotalBenefitAmount();
+        EventBadge eventBadge = EventBadge.findEventBadge(totalBenefitAmount);
 
         outputView.printBenefitResult(orderAmount);
         outputView.printTotalBenefitAmount(totalBenefitAmount);
         outputView.printDiscountedAmount(discountedAmount);
-
-        EventBadge eventBadge = EventBadge.findEventBadge(totalBenefitAmount);
-        System.out.println(eventBadge.name());
+        outputView.printEventBadge(eventBadge);
     }
 }
