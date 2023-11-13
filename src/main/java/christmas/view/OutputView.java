@@ -35,4 +35,15 @@ public class OutputView {
         System.out.println("\n<할인 전 총주문 금액>");
         System.out.println(totalOrderAmount + "원");
     }
+
+    public void printGiftMenu(Menu giftMenu, int count) {
+        System.out.println("\n<증정 메뉴>");
+
+        if (count == 0) {
+            System.out.println(giftMenu.getName());
+            return;
+        }
+
+        System.out.println(giftMenu.getName() + " " + count + "개");
+    }
 }
