@@ -64,6 +64,10 @@ public class OutputView {
         String formattedTotalBenefitAmount = numberFormat.format(totalBenefitAmount);
 
         System.out.println("\n<총혜택 금액>");
+        if (totalBenefitAmount == 0) {
+            System.out.println(totalBenefitAmount + "원");
+            return;
+        }
         System.out.println("-" + formattedTotalBenefitAmount + "원");
     }
 
