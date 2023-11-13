@@ -44,4 +44,7 @@ public class OrderAmount {
         return benefitResult.calculateTotalBenefitAmount(giftMenu);
     }
 
+    public int getTotalOrderAmount() {
+        return totalOrderAmount;
+    }
 }

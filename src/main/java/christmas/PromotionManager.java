@@ -96,6 +96,8 @@ public class PromotionManager {
         outputView.printOrderMenu(orderMenu);
 
         OrderAmount orderAmount = new OrderAmount(orderMenu.calculateTotalOrderAmount());
+        outputView.printTotalOrderAmount(orderAmount);
+
         int discountedAmount = orderAmount.applyDiscount(visitDate, orderMenu);
         Menu giftMenu = orderAmount.applyGiftBenefit();
         System.out.println(discountedAmount);

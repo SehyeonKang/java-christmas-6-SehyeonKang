@@ -1,11 +1,16 @@
 package christmas.view;
 
 import christmas.domain.Menu;
+import christmas.domain.OrderAmount;
 import christmas.domain.OrderMenu;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Map;
 
 public class OutputView {
+
+    private NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.KOREA);
 
     public void printErrorMessage(String message) {
         System.out.println(message + "\n");
@@ -22,5 +27,12 @@ public class OutputView {
         for (Menu menu : orderItems.keySet()) {
             System.out.println(menu.getName() + " " + orderItems.get(menu) + "개");
         }
+    }
+
+    public void printTotalOrderAmount(OrderAmount orderAmount) {
+        String totalOrderAmount = numberFormat.format(orderAmount.getTotalOrderAmount());
+
+        System.out.println("\n<할인 전 총주문 금액>");
+        System.out.println(totalOrderAmount + "원");
     }
 }
