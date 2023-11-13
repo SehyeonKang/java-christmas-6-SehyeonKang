@@ -92,6 +92,9 @@ public class PromotionManager {
     }
 
     private void runPromotion(VisitDate visitDate, OrderMenu orderMenu) {
+        outputView.printPromotionStartText();
+        outputView.printOrderMenu(orderMenu);
+
         OrderAmount orderAmount = new OrderAmount(orderMenu.calculateTotalOrderAmount());
         int discountedAmount = orderAmount.applyDiscount(visitDate, orderMenu);
         Menu giftMenu = orderAmount.applyGiftBenefit();

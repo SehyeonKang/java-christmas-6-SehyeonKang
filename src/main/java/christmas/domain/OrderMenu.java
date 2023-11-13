@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,5 +93,9 @@ public class OrderMenu {
         }
 
         return mainCount;
+    }
+
+    public Map<Menu, Integer> getOrderItems() {
+        return Collections.unmodifiableMap(orderItems);
     }
 }

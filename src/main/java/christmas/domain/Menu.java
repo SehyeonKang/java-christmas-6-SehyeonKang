@@ -39,4 +39,8 @@ public enum Menu {
     public int plusPrice(int amount) {
         return price + amount;
     }
+
+    public String getName() {
+        return name;
+    }
 }
