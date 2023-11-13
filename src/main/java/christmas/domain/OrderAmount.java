@@ -40,8 +40,8 @@ public class OrderAmount {
         return Menu.EMPTY;
     }
 
-    public int calculateTotalBenefitAmount(Menu giftMenu) {
-        return benefitResult.calculateTotalBenefitAmount(giftMenu);
+    public int calculateTotalBenefitAmount() {
+        return benefitResult.calculateTotalBenefitAmount();
     }
 
     public int getTotalOrderAmount() {

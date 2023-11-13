@@ -57,13 +57,12 @@ public class BenefitResult {
         return 0;
     }
 
-    public int calculateTotalBenefitAmount(Menu giftMenu) {
+    public int calculateTotalBenefitAmount() {
         int totalBenefitAmount = 0;
 
         for (int discountAmount : benefitResult.values()) {
             totalBenefitAmount += discountAmount;
         }
-        totalBenefitAmount = giftMenu.plusPrice(totalBenefitAmount);
 
         return totalBenefitAmount;
     }
