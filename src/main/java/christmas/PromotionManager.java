@@ -4,10 +4,7 @@ import christmas.domain.*;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PromotionManager {
 
@@ -99,9 +96,8 @@ public class PromotionManager {
         outputView.printTotalOrderAmount(orderAmount);
 
         announceGiftMenu(orderAmount);
+        announceBenefitResult(orderAmount, orderMenu, visitDate);
 
-        int discountedAmount = orderAmount.applyDiscount(visitDate, orderMenu);
-        System.out.println(discountedAmount);
         int totalBenefitAmount = orderAmount.calculateTotalBenefitAmount();
         EventBadge eventBadge = EventBadge.findEventBadge(totalBenefitAmount);
         System.out.println(totalBenefitAmount);
@@ -116,5 +112,11 @@ public class PromotionManager {
             return;
         }
         outputView.printGiftMenu(giftMenu, 1);
+    }
+
+    private void announceBenefitResult(OrderAmount orderAmount, OrderMenu orderMenu, VisitDate visitDate) {
+        int discountedAmount = orderAmount.applyDiscount(visitDate, orderMenu);
+
+        outputView.printBenefitResult(orderAmount);
     }
 }

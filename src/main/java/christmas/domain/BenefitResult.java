@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
 public class BenefitResult {
@@ -8,7 +8,7 @@ public class BenefitResult {
     private final Map<DiscountEvent, Integer> benefitResult;
 
     public BenefitResult() {
-        benefitResult = new LinkedHashMap<>();
+        benefitResult = new HashMap<>();
     }
 
     public int applyChristMasDDayDiscount(DiscountEvent discountEvent, VisitDate visitDate) {
@@ -65,5 +65,9 @@ public class BenefitResult {
         }
 
         return totalBenefitAmount;
+    }
+
+    public Map<DiscountEvent, Integer> getBenefitResult() {
+        return benefitResult;
     }
 }

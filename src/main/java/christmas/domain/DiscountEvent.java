@@ -44,4 +44,8 @@ public enum DiscountEvent {
         return days.stream()
                 .anyMatch(day -> day == orderDay);
     }
+
+    public String getName() {
+        return name;
+    }
 }

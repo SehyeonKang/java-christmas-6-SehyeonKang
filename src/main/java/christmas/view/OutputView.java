@@ -1,8 +1,6 @@
 package christmas.view;
 
-import christmas.domain.Menu;
-import christmas.domain.OrderAmount;
-import christmas.domain.OrderMenu;
+import christmas.domain.*;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -45,5 +43,20 @@ public class OutputView {
         }
 
         System.out.println(giftMenu.getName() + " " + count + "개");
+    }
+
+    public void printBenefitResult(OrderAmount orderAmount) {
+        BenefitResult benefitResult = orderAmount.getBenefitResult();
+        Map<DiscountEvent, Integer> result = benefitResult.getBenefitResult();
+
+        System.out.println("\n<혜택 내역>");
+        for (DiscountEvent event : result.keySet()) {
+            String discountAmount = numberFormat.format(result.get(event));
+            System.out.println(event.getName() + ": -" + discountAmount + "원");
+        }
+
+        if (result.size() == 0) {
+            System.out.println("없음");
+        }
     }
 }

@@ -47,4 +47,8 @@ public class OrderAmount {
     public int getTotalOrderAmount() {
         return totalOrderAmount;
     }
+
+    public BenefitResult getBenefitResult() {
+        return benefitResult;
+    }
 }
