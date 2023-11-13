@@ -59,4 +59,11 @@ public class OutputView {
             System.out.println("없음");
         }
     }
+
+    public void printTotalBenefitAmount(int totalBenefitAmount) {
+        String formattedTotalBenefitAmount = numberFormat.format(totalBenefitAmount);
+
+        System.out.println("\n<총혜택 금액>");
+        System.out.println("-" + formattedTotalBenefitAmount + "원");
+    }
 }
