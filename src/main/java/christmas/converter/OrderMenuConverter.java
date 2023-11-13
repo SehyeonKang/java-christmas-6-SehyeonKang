@@ -1,5 +1,7 @@
 package christmas.converter;
 
+import christmas.exception.ExceptionMessage;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -31,13 +33,13 @@ public class OrderMenuConverter {
 
     private void validateOrderFormat(List<String> itemParts) {
         if (itemParts.size() == 1) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            ExceptionMessage.INVALID_ORDER.throwIllegalArgumentException();
         }
     }
 
     private void validateDuplicateOrder(Map<String, Integer> orderedItemInfo, String menuName) {
         if (orderedItemInfo.containsKey(menuName)) {
-            throw new IllegalArgumentException("[ERROR] 중복된 메뉴를 주문했습니다. 다시 입력해 주세요.");
+            ExceptionMessage.DUPLICATE_ORDER.throwIllegalArgumentException();
         }
     }
 
@@ -45,7 +47,8 @@ public class OrderMenuConverter {
         try {
             return Integer.parseInt(itemCount);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            ExceptionMessage.INVALID_ORDER.throwIllegalArgumentException();
+            return 0;
         }
     }
 }

@@ -1,6 +1,7 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.exception.ExceptionMessage;
 
 public class InputView {
 
@@ -15,7 +16,7 @@ public class InputView {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해주세요");
+            ExceptionMessage.INVALID_DATE.throwIllegalArgumentException();
         }
     }
 

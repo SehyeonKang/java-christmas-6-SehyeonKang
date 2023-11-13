@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.exception.ExceptionMessage;
+
 import java.util.List;
 
 public class VisitDate {
@@ -13,7 +15,7 @@ public class VisitDate {
 
     private void validateVisitDate(int day) {
         if (day < 1 || day > 31) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해주세요");
+            ExceptionMessage.INVALID_DATE.throwIllegalArgumentException();
         }
     }
 

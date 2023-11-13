@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.exception.ExceptionMessage;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +29,7 @@ public class OrderMenu {
     private void validateOrderAgainstMenu() {
         for (Menu menu : orderItems.keySet()) {
             if (menu == Menu.EMPTY) {
-                throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                ExceptionMessage.INVALID_ORDER.throwIllegalArgumentException();
             }
         }
     }
@@ -41,7 +43,7 @@ public class OrderMenu {
         }
 
         if (beverageCount == orderItems.size()) {
-            throw new IllegalArgumentException("[ERROR] 음료만 주문할 수 없습니다. 다시 입력해 주세요.");
+            ExceptionMessage.ONLY_BEVERAGE.throwIllegalArgumentException();
         }
     }
 
@@ -52,11 +54,11 @@ public class OrderMenu {
         }
 
         if (totalItemCount < 1) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            ExceptionMessage.INVALID_ORDER.throwIllegalArgumentException();
         }
 
         if (totalItemCount > 20) {
-            throw new IllegalArgumentException("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해 주세요.");
+            ExceptionMessage.LIMIT_EXCEEDED_ORDER.throwIllegalArgumentException();
         }
     }
 
