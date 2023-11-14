@@ -35,11 +35,17 @@ public class OrderMenuConverter {
         if (itemParts.size() == 1) {
             ExceptionMessage.INVALID_ORDER.throwIllegalArgumentException();
         }
+
+        for (String itemPart : itemParts) {
+            if (itemPart.contains(" ")) {
+                ExceptionMessage.INVALID_ORDER.throwIllegalArgumentException();
+            }
+        }
     }
 
     private void validateDuplicateOrder(Map<String, Integer> orderedItemInfo, String menuName) {
         if (orderedItemInfo.containsKey(menuName)) {
-            ExceptionMessage.DUPLICATE_ORDER.throwIllegalArgumentException();
+            ExceptionMessage.INVALID_ORDER.throwIllegalArgumentException();
         }
     }
 
