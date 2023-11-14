@@ -56,12 +56,15 @@ public class PromotionManager {
         OrderAmount orderAmount = new OrderAmount(orderMenu.calculateTotalOrderAmount());
         outputView.printTotalOrderAmount(orderAmount);
 
-        announceGiftMenu(orderAmount);
-        announceBenefitResults(orderAmount, orderMenu, visitDate);
+        BenefitResult benefitResult = new BenefitResult();
+        int discountAmount = benefitResult.applyDiscountEvents(orderAmount, visitDate, orderMenu);
+
+        announceGiftMenu(benefitResult, orderAmount);
+        announceBenefitResults(benefitResult, orderAmount,discountAmount);
     }
 
-    private void announceGiftMenu(OrderAmount orderAmount) {
-        Menu giftMenu = orderAmount.applyGiftBenefit();
+    private void announceGiftMenu(BenefitResult benefitResult, OrderAmount orderAmount) {
+        Menu giftMenu = benefitResult.applyGiftBenefit(orderAmount);
 
         if (giftMenu == Menu.EMPTY) {
             outputView.printGiftMenu(giftMenu, 0);
@@ -70,12 +73,12 @@ public class PromotionManager {
         outputView.printGiftMenu(giftMenu, 1);
     }
 
-    private void announceBenefitResults(OrderAmount orderAmount, OrderMenu orderMenu, VisitDate visitDate) {
-        int discountedAmount = orderAmount.applyDiscount(visitDate, orderMenu);
-        int totalBenefitAmount = orderAmount.calculateTotalBenefitAmount();
+    private void announceBenefitResults(BenefitResult benefitResult, OrderAmount orderAmount, int discountAmount) {
+        int discountedAmount = orderAmount.calculateDiscountedAmount(discountAmount);
+        int totalBenefitAmount = benefitResult.calculateTotalBenefitAmount();
         EventBadge eventBadge = EventBadge.findEventBadge(totalBenefitAmount);
 
-        outputView.printBenefitResult(orderAmount);
+        outputView.printBenefitResult(benefitResult);
         outputView.printTotalBenefitAmount(totalBenefitAmount);
         outputView.printDiscountedAmount(discountedAmount);
         outputView.printEventBadge(eventBadge);

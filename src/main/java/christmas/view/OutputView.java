@@ -45,8 +45,7 @@ public class OutputView {
         System.out.println(giftMenu.getName() + " " + count + "개");
     }
 
-    public void printBenefitResult(OrderAmount orderAmount) {
-        BenefitResult benefitResult = orderAmount.getBenefitResult();
+    public void printBenefitResult(BenefitResult benefitResult) {
         Map<DiscountEvent, Integer> result = benefitResult.getBenefitResult();
 
         System.out.println("\n<혜택 내역>");
