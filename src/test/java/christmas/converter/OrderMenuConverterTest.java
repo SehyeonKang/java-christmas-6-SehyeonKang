@@ -12,11 +12,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class OrderMenuConverterTest {
 
+    OrderMenuConverter orderMenuConverter = new OrderMenuConverter();
+
     @DisplayName("문자열로 받은 주문 메뉴를 Map으로 변환한다.")
     @Test
     void convertToMap() {
         String input = "타파스-1,제로콜라-2";
-        OrderMenuConverter orderMenuConverter = new OrderMenuConverter();
 
         Map<String, Integer> orderItemInfo = orderMenuConverter.convertToMap(input);
 
@@ -30,8 +31,6 @@ class OrderMenuConverterTest {
     @ValueSource(strings = {"타파스-1/제로콜라-2", "타파스=1,제로콜라=2", "타파스-1, 제로콜라-2", "타파스 - 1,제로콜라 - 2"})
     @ParameterizedTest
     void convertToMapByWrongForm(String input) {
-        OrderMenuConverter orderMenuConverter = new OrderMenuConverter();
-
         assertThatThrownBy(() -> orderMenuConverter.convertToMap(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
@@ -41,7 +40,6 @@ class OrderMenuConverterTest {
     @Test
     void convertToMapByDuplicateMenu() {
         String input = "타파스-1,제로콜라-2,타파스-3";
-        OrderMenuConverter orderMenuConverter = new OrderMenuConverter();
 
         assertThatThrownBy(() -> orderMenuConverter.convertToMap(input))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -52,8 +50,6 @@ class OrderMenuConverterTest {
     @ValueSource(strings = {"타파스-1,제로콜라-a", "타파스-1a,제로콜라-2a", "타파스-!,제로콜라-@"})
     @ParameterizedTest
     void convertToMapByNotNumberMenuCount(String input) {
-        OrderMenuConverter orderMenuConverter = new OrderMenuConverter();
-
         assertThatThrownBy(() -> orderMenuConverter.convertToMap(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
