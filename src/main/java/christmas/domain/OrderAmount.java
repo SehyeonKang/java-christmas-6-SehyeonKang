@@ -2,6 +2,9 @@ package christmas.domain;
 
 public class OrderAmount {
 
+    private static final int MINIMUM_DISCOUNT_POSSIBLE_AMOUNT = 10000;
+    private static final int MINIMUM_GIFT_BENEFIT_POSSIBLE_AMOUNT = 120000;
+
     private final int totalOrderAmount;
 
     public OrderAmount(int totalOrderAmount) {
@@ -13,11 +16,11 @@ public class OrderAmount {
     }
 
     public boolean canApplyDiscount() {
-        return totalOrderAmount >= 10000;
+        return totalOrderAmount >= MINIMUM_DISCOUNT_POSSIBLE_AMOUNT;
     }
 
     public boolean canApplyGiftBenefit() {
-        return totalOrderAmount >= 120000;
+        return totalOrderAmount >= MINIMUM_GIFT_BENEFIT_POSSIBLE_AMOUNT;
     }
 
     public int getTotalOrderAmount() {

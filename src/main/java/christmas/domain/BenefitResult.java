@@ -7,6 +7,12 @@ import java.util.Map;
 
 public class BenefitResult {
 
+    private static final int DEFAULT_DISCOUNT_AMOUNT = 0;
+    private static final int DEFAULT_TOTAL_BENEFIT_AMOUNT = 0;
+    private static final int WEEK_DISCOUNT_AMOUNT = 2023;
+    private static final int SPECIAL_DISCOUNT_AMOUNT = 1000;
+    private static final int GIFT_CHAMPAGNE_AMOUNT = 25000;
+
     private final Map<DiscountEvent, Integer> benefitResult;
 
     public BenefitResult() {
@@ -14,7 +20,7 @@ public class BenefitResult {
     }
 
     public int applyDiscountEvents(OrderAmount orderAmount, VisitDate visitDate, OrderMenu orderMenu) {
-        int discountAmount = 0;
+        int discountAmount = DEFAULT_DISCOUNT_AMOUNT;
 
         if (orderAmount.canApplyDiscount()) {
             List<DiscountEvent> discountEvents = visitDate.findDiscountEventByDay();
@@ -30,7 +36,7 @@ public class BenefitResult {
     }
 
     private int applyChristMasDDayDiscount(DiscountEvent discountEvent, VisitDate visitDate) {
-        int discountAmount = 0;
+        int discountAmount = DEFAULT_DISCOUNT_AMOUNT;
         if (discountEvent == DiscountEvent.CHRISTMAS_D_DAY) {
             discountAmount += visitDate.calculateChristmasDDayDiscount();
             benefitResult.put(discountEvent, discountAmount);
@@ -39,29 +45,29 @@ public class BenefitResult {
     }
 
     private int applyWeekDayDiscount(DiscountEvent discountEvent, OrderMenu orderMenu) {
-        int discountAmount = 0;
+        int discountAmount = DEFAULT_DISCOUNT_AMOUNT;
         if (discountEvent == DiscountEvent.WEEKDAY) {
             int dessertCount = orderMenu.countDessertItems();
-            discountAmount += 2023 * dessertCount;
+            discountAmount += WEEK_DISCOUNT_AMOUNT * dessertCount;
             benefitResult.put(discountEvent, discountAmount);
         }
         return discountAmount;
     }
 
     private int applyWeekEndDiscount(DiscountEvent discountEvent, OrderMenu orderMenu) {
-        int discountAmount = 0;
+        int discountAmount = DEFAULT_DISCOUNT_AMOUNT;
         if (discountEvent == DiscountEvent.WEEKEND) {
             int mainCount = orderMenu.countMainItems();
-            discountAmount += 2023 * mainCount;
+            discountAmount += WEEK_DISCOUNT_AMOUNT * mainCount;
             benefitResult.put(discountEvent, discountAmount);
         }
         return discountAmount;
     }
 
     private int applySpecialDiscount(DiscountEvent discountEvent) {
-        int discountAmount = 0;
+        int discountAmount = DEFAULT_DISCOUNT_AMOUNT;
         if (discountEvent == DiscountEvent.SPECIAL) {
-            discountAmount = 1000;
+            discountAmount = SPECIAL_DISCOUNT_AMOUNT;
             benefitResult.put(discountEvent, discountAmount);
         }
         return discountAmount;
@@ -69,7 +75,7 @@ public class BenefitResult {
 
     public Menu applyGiftBenefit(OrderAmount orderAmount) {
         if (orderAmount.canApplyGiftBenefit()) {
-            benefitResult.put(DiscountEvent.GIFT, 25000);
+            benefitResult.put(DiscountEvent.GIFT, GIFT_CHAMPAGNE_AMOUNT);
             return Menu.CHAMPAGNE;
         }
 
@@ -77,7 +83,7 @@ public class BenefitResult {
     }
 
     public int calculateTotalBenefitAmount() {
-        int totalBenefitAmount = 0;
+        int totalBenefitAmount = DEFAULT_TOTAL_BENEFIT_AMOUNT;
 
         for (int discountAmount : benefitResult.values()) {
             totalBenefitAmount += discountAmount;

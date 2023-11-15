@@ -10,6 +10,9 @@ import java.util.*;
 
 public class PromotionManager {
 
+    private static final int NO_GIFT_COUNT = 0;
+    private static final int GIFT_COUNT = 1;
+
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -70,10 +73,10 @@ public class PromotionManager {
         Menu giftMenu = benefitResult.applyGiftBenefit(orderAmount);
 
         if (giftMenu == Menu.EMPTY) {
-            outputView.printGiftMenu(giftMenu, 0);
+            outputView.printGiftMenu(giftMenu, NO_GIFT_COUNT);
             return;
         }
-        outputView.printGiftMenu(giftMenu, 1);
+        outputView.printGiftMenu(giftMenu, GIFT_COUNT);
     }
 
     private void announceBenefitResults(BenefitResult benefitResult, OrderAmount orderAmount, int discountAmount) {

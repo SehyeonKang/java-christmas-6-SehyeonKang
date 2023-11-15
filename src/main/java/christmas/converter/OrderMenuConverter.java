@@ -9,22 +9,30 @@ import java.util.Map;
 
 public class OrderMenuConverter {
 
+    private static final String SPLITTER_COMMA = ",";
+    private static final String SPLITTER_BAR = "-";
+    private static final String STRING_EMPTY = " ";
+    private static final int MENU_NAME_INDEX = 0;
+    private static final int TERMINATE_METHOD_ZERO = 0;
+    private static final int MENU_COUNT_INDEX = 1;
+    private static final int INVALID_ORDER_FORMAT_SIZE = 1;
+
     public Map<String, Integer> convertToMap(String inputOrderMenu) {
         Map<String, Integer> orderedItemInfo = new HashMap<>();
-        List<String> orderedItems = Arrays.asList(inputOrderMenu.split(","));
+        List<String> orderedItems = Arrays.asList(inputOrderMenu.split(SPLITTER_COMMA));
 
         return createOrderedItems(orderedItemInfo, orderedItems);
     }
 
     private Map<String, Integer> createOrderedItems(Map<String, Integer> orderedItemInfo, List<String> orderedItems) {
         for (String orderedItem : orderedItems) {
-            List<String> itemParts = Arrays.asList(orderedItem.split("-"));
+            List<String> itemParts = Arrays.asList(orderedItem.split(SPLITTER_BAR));
             validateOrderFormat(itemParts);
 
-            String menuName = itemParts.get(0);
-            int count = convertToInt(itemParts.get(1));
+            String menuName = itemParts.get(MENU_NAME_INDEX);
+            int count = convertToInt(itemParts.get(MENU_COUNT_INDEX));
 
-            validateDuplicateOrder(orderedItemInfo, itemParts.get(0));
+            validateDuplicateOrder(orderedItemInfo, itemParts.get(MENU_NAME_INDEX));
             orderedItemInfo.put(menuName, count);
         }
 
@@ -32,12 +40,12 @@ public class OrderMenuConverter {
     }
 
     private void validateOrderFormat(List<String> itemParts) {
-        if (itemParts.size() == 1) {
+        if (itemParts.size() == INVALID_ORDER_FORMAT_SIZE) {
             ExceptionMessage.INVALID_ORDER.throwIllegalArgumentException();
         }
 
         for (String itemPart : itemParts) {
-            if (itemPart.contains(" ")) {
+            if (itemPart.contains(STRING_EMPTY)) {
                 ExceptionMessage.INVALID_ORDER.throwIllegalArgumentException();
             }
         }
@@ -54,7 +62,7 @@ public class OrderMenuConverter {
             return Integer.parseInt(itemCount);
         } catch (NumberFormatException e) {
             ExceptionMessage.INVALID_ORDER.throwIllegalArgumentException();
-            return 0;
+            return TERMINATE_METHOD_ZERO;
         }
     }
 }

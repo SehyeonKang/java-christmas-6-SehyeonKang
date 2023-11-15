@@ -8,6 +8,10 @@ import java.util.Map;
 
 public class OrderMenu {
 
+    private static final int DEFAULT_COUNT_ZERO = 0;
+    private static final int MINIMUM_POSSIBLE_MENU_COUNT = 1;
+    private static final int MAXIMUM_POSSIBLE_MENU_COUNT = 20;
+
     private final Map<Menu, Integer> orderItems;
 
     public OrderMenu(Map<String, Integer> orderedItems) {
@@ -35,7 +39,7 @@ public class OrderMenu {
     }
 
     private void validateOnlyBeverage() {
-        int beverageCount = 0;
+        int beverageCount = DEFAULT_COUNT_ZERO;
         for (Menu menu : orderItems.keySet()) {
             if (MenuGroup.findByMenu(menu) == MenuGroup.BEVERAGE) {
                 beverageCount++;
@@ -48,22 +52,22 @@ public class OrderMenu {
     }
 
     private void validateTotalItemCount() {
-        int totalItemCount = 0;
+        int totalItemCount = DEFAULT_COUNT_ZERO;
         for (Menu menu : orderItems.keySet()) {
             totalItemCount += orderItems.get(menu);
         }
 
-        if (totalItemCount < 1) {
+        if (totalItemCount < MINIMUM_POSSIBLE_MENU_COUNT) {
             ExceptionMessage.INVALID_ORDER.throwIllegalArgumentException();
         }
 
-        if (totalItemCount > 20) {
+        if (totalItemCount > MAXIMUM_POSSIBLE_MENU_COUNT) {
             ExceptionMessage.LIMIT_EXCEEDED_ORDER.throwIllegalArgumentException();
         }
     }
 
     public int calculateTotalOrderAmount() {
-        int totalOrderAmount = 0;
+        int totalOrderAmount = DEFAULT_COUNT_ZERO;
 
         for (Menu menu : orderItems.keySet()) {
             int orderCount = orderItems.get(menu);
@@ -74,7 +78,7 @@ public class OrderMenu {
     }
 
     public int countDessertItems() {
-        int dessertCount = 0;
+        int dessertCount = DEFAULT_COUNT_ZERO;
 
         for (Menu menu : orderItems.keySet()) {
             if (MenuGroup.findByMenu(menu) == MenuGroup.DESSERT) {
@@ -86,7 +90,7 @@ public class OrderMenu {
     }
 
     public int countMainItems() {
-        int mainCount = 0;
+        int mainCount = DEFAULT_COUNT_ZERO;
 
         for (Menu menu : orderItems.keySet()) {
             if (MenuGroup.findByMenu(menu) == MenuGroup.MAIN) {
