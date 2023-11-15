@@ -8,16 +8,7 @@ public class InputView {
     public String readVisitDate() {
         System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
         String input = Console.readLine();
-        validateDateDigit(input);
         return input;
-    }
-
-    private void validateDateDigit(String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            ExceptionMessage.INVALID_DATE.throwIllegalArgumentException();
-        }
     }
 
     public String readOrderMenu() {

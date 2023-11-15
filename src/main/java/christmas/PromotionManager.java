@@ -1,6 +1,7 @@
 package christmas;
 
 import christmas.converter.OrderMenuConverter;
+import christmas.converter.VisitDateConverter;
 import christmas.domain.*;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -24,10 +25,12 @@ public class PromotionManager {
     }
 
     private VisitDate saveVisitDate() {
+        VisitDateConverter visitDateConverter = new VisitDateConverter();
+
         while (true) {
             try {
                 String inputDate = inputView.readVisitDate();
-                int visitDay = Integer.parseInt(inputDate);
+                int visitDay = visitDateConverter.convertToInt(inputDate);
                 return new VisitDate(visitDay);
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
